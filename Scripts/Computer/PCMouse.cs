@@ -26,8 +26,8 @@ public class PCMouse : MonoBehaviour
         screenMousePos.y = Mathf.Clamp(screenMousePos.y, -196f, 182f);
         cursor.GetComponent<RectTransform>().localPosition = screenMousePos;
         gameMousePos = new Vector3 (pcMouse.transform.position.x + mouseX / 150,pcMouse.transform.position.y,pcMouse.transform.position.z + mouseY / 150);
-        gameMousePos.x = Mathf.Clamp(gameMousePos.x, -7.14f, -6.66f);
-        gameMousePos.z = Mathf.Clamp(gameMousePos.z, 2.87f, 3.25f);
+        gameMousePos.x = Mathf.Clamp(gameMousePos.x, -6.642f, -6.123f);
+        gameMousePos.z = Mathf.Clamp(gameMousePos.z, 3.992f, 4.391f);
         pcMouse.transform.position = gameMousePos;
     }
 }
