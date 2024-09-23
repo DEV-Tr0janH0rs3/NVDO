@@ -11,6 +11,8 @@ public class CameraScript : MonoBehaviour
 
 	public GameObject hand;
 
+    public Controll_Interactables ci;
+
 	float xRotation = 0f;
 
     void Start()
@@ -40,48 +42,37 @@ public class CameraScript : MonoBehaviour
     	Debug.DrawRay(this.transform.position, this.transform.forward * 100, Color.red, 2f);
     	RaycastHit hit;
 
-        //Hit detection
     	if(Physics.Raycast(ray, out hit)){
-    		if(hit.collider != null){
-    			Debug.Log(hit.collider.transform.gameObject.name);
-    			if(hit.collider.transform.gameObject.name == "MONITORScreen"){
-    				ctrlCams.stopMainCtrl();
+            GameObject hitObj = hit.collider.transform.gameObject;
+    		Debug.Log(hitObj.name);
+    		if(hitObj.name == "MONITORScreen"){
+    			ci.ControlCams(ctrlCams);
+    		}
+			if(hitObj.tag == "Pickable"){
+                ci.PickReturnObject(1,hand.transform,hit.collider.transform);
+    		}
+    		if(hitObj.name == "COMP1"){
+    			if(hitObj.GetComponent<PC>().onoroff){
+    				hitObj.GetComponent<PC>().DvDOpenClose(false);
+    			} else {
+    				hitObj.GetComponent<PC>().DvDOpenClose(true);
     			}
-    			if(hit.collider.transform.gameObject.tag == "Pickable"){
-    				hit.collider.transform.SetParent(hand.transform);
-    				hit.collider.transform.localPosition = Vector3.zero;
-    			}
-    			if(hit.collider.transform.gameObject.name == "COMP1"){
-    				if(hit.collider.transform.gameObject.GetComponent<PC>().onoroff){
-    					hit.collider.transform.gameObject.GetComponent<PC>().DvDOpenClose(false);
-    				} else {
-    					hit.collider.transform.gameObject.GetComponent<PC>().DvDOpenClose(true);
-    				}
-    			}
-    			if(hit.collider.transform.gameObject.name == "DvD" && hand.transform.childCount > 0 && hand.transform.GetChild(0).gameObject.name.Contains("Disk")){
-    				GameObject diska = hand.transform.GetChild(0).gameObject;
-    				hand.transform.GetChild(0).gameObject.transform.SetParent(hit.collider.transform.gameObject.transform);
-    				diska.transform.localPosition = new Vector3(0,0,0.7f);
-    			}
-    			if(hit.collider.transform.gameObject.tag == "DvDBox" && hand.transform.childCount > 0 && hand.transform.GetChild(0).gameObject.name.Contains("Disk")){
-    				GameObject diska = hand.transform.GetChild(0).gameObject;
-    				hand.transform.GetChild(0).gameObject.transform.SetParent(hit.collider.transform.gameObject.transform.root);
-    				diska.transform.localPosition = new Vector3(0f,-0.01f,0f);
-    			}
-    			if(hit.collider.transform.gameObject.tag == "DvDBox" && hand.transform.childCount == 0){
-    				if(hit.collider.transform.gameObject.transform.root.gameObject.GetComponent<DvDOpen>().onoroff){
-    					hit.collider.transform.gameObject.transform.root.gameObject.GetComponent<DvDOpen>().onoroff = false;
-    				} else {
-    					hit.collider.transform.gameObject.transform.root.gameObject.GetComponent<DvDOpen>().onoroff = true;
-    				}
-    			}
-    			if(hit.collider.transform.gameObject.tag == "Door"){
-    				if(hit.collider.transform.gameObject.transform.root.gameObject.GetComponent<DoorScript>().onoroff){
-    					hit.collider.transform.gameObject.transform.root.gameObject.GetComponent<DoorScript>().onoroff = false;
-    				} else {
-    					hit.collider.transform.gameObject.transform.root.gameObject.GetComponent<DoorScript>().onoroff = true;
-    				}
-    			}
+    		}
+            if(hitObj.name == "DvD" && hand.transform.childCount > 0 && hand.transform.GetChild(0).gameObject.name.Contains("Disk")){
+    			GameObject diska = hand.transform.GetChild(0).gameObject;
+    			hand.transform.GetChild(0).gameObject.transform.SetParent(hitObj.transform);
+    			diska.transform.localPosition = new Vector3(0,0,0.7f);
+    		}
+    		if(hitObj.tag == "DvDBox" && hand.transform.childCount > 0 && hand.transform.GetChild(0).gameObject.name.Contains("Disk")){
+    			GameObject diska = hand.transform.GetChild(0).gameObject;
+    			hand.transform.GetChild(0).gameObject.transform.SetParent(hitObj.transform.root);
+    			diska.transform.localPosition = new Vector3(0f,-0.01f,0f);
+    		}
+    		if(hitObj.tag == "DvDBox" && hand.transform.childCount == 0){
+                ci.OpenClose(hitObj.transform.root.gameObject.GetComponent<DvDOpen>(),null);
+    		}
+    		if(hitObj.tag == "Door"){
+                ci.OpenClose(null,hitObj.transform.root.gameObject.GetComponent<DoorScript>());
     		}
     	}
     }
