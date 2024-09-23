@@ -10,13 +10,6 @@ public class PCMouse : MonoBehaviour
 	public Vector3 gameMousePos;
 	public Vector3 screenMousePos;  
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         float mouseX = Input.GetAxisRaw("Mouse X");

@@ -12,14 +12,13 @@ public class CameraScript : MonoBehaviour
 	public GameObject hand;
 
 	float xRotation = 0f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSense * Time.deltaTime;

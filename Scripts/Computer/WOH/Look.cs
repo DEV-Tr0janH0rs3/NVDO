@@ -8,13 +8,11 @@ public class Look : MonoBehaviour
 	public GameObject shootHole;
 	public GameObject gameTF;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
 		Vector3 relativePos = pointer.transform.position - this.transform.position;

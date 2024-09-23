@@ -7,8 +7,6 @@ public class PcStates : MonoBehaviour
     public AudioSource audio;
     public AudioSource audio2;
 
-
-
     public void CallBlink()
     {
     	StartCoroutine(BlinkLight());
@@ -32,16 +30,13 @@ public class PcStates : MonoBehaviour
 
     public IEnumerator BlinkLight()
     {
-
             int burstCount = Random.Range(30, 200); 
             Debug.Log(burstCount);
             for (int i = 0; i < burstCount; i++)
             {
-
                 thinkLight.SetActive(!thinkLight.activeSelf);
                 yield return new WaitForSeconds(0.01f);
             }
-
             thinkLight.SetActive(false);
     }
 }
