@@ -7,8 +7,8 @@ public class PC : MonoBehaviour
 	public void TurnOnOff(){
 
 	}
-	public void DvDOpenClose(bool onoff){
-		if(onoff){
+	public void DvDOpenClose(){
+		if(DvDDrive.GetBool("OpenClose") == false){
 			onoroff = true;
 			DvDDrive.SetBool("OpenClose", true);
 		} else {

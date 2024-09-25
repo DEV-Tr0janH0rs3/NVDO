@@ -13,15 +13,14 @@ public class Controll_Interactables : MonoBehaviour
     			pickedObject.localPosition = Vector3.zero;
 		        break;
 		    case 2:
-
 		        break;
 		    default:
 		        break;
 		}
 	}
 
-	public void ComputerControll(int cmd){
-
+	public void ComputerControll(RayCastMSG menu){
+		menu.OpenMenu();
 	}
 
 	public void OpenClose(DvDOpen dvd, DoorScript ds){

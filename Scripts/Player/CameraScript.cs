@@ -15,7 +15,7 @@ public class CameraScript : MonoBehaviour
 
 	float xRotation = 0f;
 
-    void Start()
+    void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -38,8 +38,8 @@ public class CameraScript : MonoBehaviour
     }
 
     public void ShootRay(){
-    	Ray ray = new Ray(this.transform.position, this.transform.forward * 100);
-    	Debug.DrawRay(this.transform.position, this.transform.forward * 100, Color.red, 2f);
+    	Ray ray = new Ray(this.transform.position, this.transform.forward);
+    	Debug.DrawRay(this.transform.position, this.transform.forward * 2, Color.red, 2f);
     	RaycastHit hit;
 
     	if(Physics.Raycast(ray, out hit)){
@@ -52,11 +52,7 @@ public class CameraScript : MonoBehaviour
                 ci.PickReturnObject(1,hand.transform,hit.collider.transform);
     		}
     		if(hitObj.name == "COMP1"){
-    			if(hitObj.GetComponent<PC>().onoroff){
-    				hitObj.GetComponent<PC>().DvDOpenClose(false);
-    			} else {
-    				hitObj.GetComponent<PC>().DvDOpenClose(true);
-    			}
+                ci.ComputerControll(hitObj.GetComponent<RayCastMSG>());
     		}
             if(hitObj.name == "DvD" && hand.transform.childCount > 0 && hand.transform.GetChild(0).gameObject.name.Contains("Disk")){
     			GameObject diska = hand.transform.GetChild(0).gameObject;

@@ -8,13 +8,13 @@ public class ControlPC : MonoBehaviour
 	public GameObject LowRez1;
 	public GameObject LowRez2;
 	public GameObject pcCam1;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+	public GameObject crosshair;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
 		if(Input.GetKeyDown(KeyCode.Escape)){
@@ -25,6 +25,7 @@ public class ControlPC : MonoBehaviour
 				LowRez1.SetActive(true);
 				LowRez2.SetActive(false);
 				pcCam1.SetActive(false);
+				crosshair.SetActive(true);
 			}
 		}
     }
@@ -36,5 +37,6 @@ public class ControlPC : MonoBehaviour
     	LowRez1.SetActive(false);
     	LowRez2.SetActive(true);
     	pcCam1.SetActive(true);
+    	crosshair.SetActive(false);
     }
 }
