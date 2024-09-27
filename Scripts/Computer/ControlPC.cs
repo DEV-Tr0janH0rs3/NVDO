@@ -10,11 +10,6 @@ public class ControlPC : MonoBehaviour
 	public GameObject pcCam1;
 	public GameObject crosshair;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
 		if(Input.GetKeyDown(KeyCode.Escape)){

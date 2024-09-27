@@ -35,6 +35,16 @@ public class CameraScript : MonoBehaviour
 		if(Input.GetMouseButtonDown(0)){
 			ShootRay();
 		}
+
+        if(Input.GetKeyDown(KeyCode.U)){
+            if(Cursor.lockState == CursorLockMode.None){
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            } else {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
     }
 
     public void ShootRay(){
@@ -42,7 +52,7 @@ public class CameraScript : MonoBehaviour
     	Debug.DrawRay(this.transform.position, this.transform.forward * 2, Color.red, 2f);
     	RaycastHit hit;
 
-    	if(Physics.Raycast(ray, out hit)){
+    	if(Physics.Raycast(ray, out hit, 3f)){
             GameObject hitObj = hit.collider.transform.gameObject;
     		Debug.Log(hitObj.name);
     		if(hitObj.name == "MONITORScreen"){

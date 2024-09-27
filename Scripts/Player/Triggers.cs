@@ -2,19 +2,13 @@ using UnityEngine;
 
 public class Triggers : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public DialogueS dialogue;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag == "DialogueTrigger"){
+            dialogue.dialogueChange("",0);
+        }
        	other.gameObject.GetComponent<ChangeTransparancy>().isInside = true;
     }
     private void OnTriggerExit(Collider other)

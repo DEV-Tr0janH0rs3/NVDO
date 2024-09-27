@@ -4,11 +4,8 @@ public class ChangeTransparancy : MonoBehaviour
 {
   	public Material transparentmat;
   	public Material normalmat;
-
   	public bool isInside;
-
   	public DoorScript ds;
-
   	public GameObject door1;
   	public GameObject door2;
 
